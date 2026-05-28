@@ -8,6 +8,7 @@ from sklearn.mixture import GaussianMixture
 from HisToINR.extend.networks import *
 import scanpy as sc
 import matplotlib.pyplot as plt
+STINR
 
 np.random.seed(1234)
 # slice_idx = [151507, 151508, 151509, 151510]
@@ -92,23 +93,21 @@ class Model():
         # UNI Image Feature extractor
         # all_features = []
         # for i, adata in enumerate(adata_st_list_raw):
-        #     # step1:读取每个切片的图像
+        #     # step1:read Image
         #     section_id = str(slice_idx[i])
         #     img_path = os.path.join('HisToINR/Images',
         #                                       section_id + '_hires_image.png')
-        #     # step2：读入坐标
+        #     # step2：read spatial
         #     scale = adata.uns['spatial'][list(adata.uns["spatial"].keys())[0]]['scalefactors']['tissue_hires_scalef']
         #     spatial = (adata.obsm['spatial'] * scale).astype(int)
-        #     # step3:提取图像特征
+        #     # step3: extract UNI Image feature(dim:1024)
         #     image_feat_uni = UNI_features(img_path, spatial)
-        #     # step4:收集特征
+        #     # step4: collect feature
         #     all_features.append(image_feat_uni)
         # combined_features = np.vstack(all_features)  # [14243,1024]
         # image_feat = torch.tensor(combined_features, dtype=torch.float32, requires_grad=True)
-        # # 推荐方法：保存到obsm中
         # image_feat_np = image_feat.detach().cpu().numpy()
         # adata_st.obsm['image_feat_uni'] = image_feat_np
-        # print(f"图像特征已保存到 obsm['image_feat_uni']，形状: {adata_st.obsm['image_feat_uni'].shape}")
         # adata_st.write('adata_st_DLPFC_modified1_first.h5ad')
 
         # read data
