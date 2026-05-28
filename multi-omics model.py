@@ -5,7 +5,7 @@ import os
 import anndata as ad
 from sklearn.metrics.cluster import adjusted_rand_score
 from sklearn.mixture import GaussianMixture
-from STINR.extend.networks import *
+from HisToINR.extend.networks import *
 import scanpy as sc
 import matplotlib.pyplot as plt
 
@@ -94,7 +94,7 @@ class Model():
         # for i, adata in enumerate(adata_st_list_raw):
         #     # step1:读取每个切片的图像
         #     section_id = str(slice_idx[i])
-        #     img_path = os.path.join('STINR/Images',
+        #     img_path = os.path.join('HisToINR/Images',
         #                                       section_id + '_hires_image.png')
         #     # step2：读入坐标
         #     scale = adata.uns['spatial'][list(adata.uns["spatial"].keys())[0]]['scalefactors']['tissue_hires_scalef']
@@ -153,13 +153,13 @@ class Model():
             if step % 1000 == 0:
 
                 adata_st_list_raw0 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/151669.h5ad')
+                    '151669.h5ad')
                 adata_st_list_raw1 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/151670.h5ad')
+                    '151670.h5ad')
                 adata_st_list_raw2 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/151671.h5ad')
+                    '151671.h5ad')
                 adata_st_list_raw3 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/151672.h5ad')
+                    '151672.h5ad')
                 adata_st_list_raw = []
                 adata_st_list_raw.append(adata_st_list_raw0)
                 adata_st_list_raw.append(adata_st_list_raw1)
@@ -169,7 +169,7 @@ class Model():
                 result = self.eval(adata_st_list_raw, save=False, output_path="./results_DLPFC")
 
                 np.random.seed(self.seed)
-                gm = GaussianMixture(n_components=5, covariance_type='tied',
+                gm = GaussianMixture(n_components=7, covariance_type='tied',
                                      reg_covar=10e-4, init_params='kmeans')
                 y = gm.fit_predict(self.latent, y=None)
                 self.adata_st.obs["GM"] = [str(z) for z in y]
@@ -177,7 +177,7 @@ class Model():
                     result[i].obs["GM"] = self.adata_st.obs.loc[result[i].obs_names,]["GM"]
 
                     section_id = str(slice_idx[i])
-                    Ann_df = pd.read_csv(os.path.join('/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/STINR/DLPFC_annotations',
+                    Ann_df = pd.read_csv(os.path.join('DLPFC_annotations',
                                                       section_id + '_truth.txt'), sep='\t',
                                          header=None, index_col=0)
                     Ann_df.columns = ['Ground Truth']
