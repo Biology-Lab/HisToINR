@@ -8,7 +8,6 @@ from sklearn.mixture import GaussianMixture
 from HisToINR.extend.networks import *
 import scanpy as sc
 import matplotlib.pyplot as plt
-STINR
 
 np.random.seed(1234)
 # slice_idx = [151507, 151508, 151509, 151510]
