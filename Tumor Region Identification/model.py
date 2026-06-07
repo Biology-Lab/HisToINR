@@ -121,8 +121,8 @@ class Model():
     def train(self, report_loss=True, step_interval=500):
         self.net.train()
 
-        # 用来存储每个切片的最高 ARI
-        highest_ari = 0 # 初始化每个切片的最高 ARI
+        # save the highest ARI
+        highest_ari = 0 
 
         for step in tqdm(range(self.net.training_steps)):
             loss, recon, denoise, Z_, ind_min, ind_max = self.net(coord=self.coord,
