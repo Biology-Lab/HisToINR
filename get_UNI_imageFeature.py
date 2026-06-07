@@ -96,6 +96,8 @@ def crop_image(img, x, y, crop_size=None):
         Y coordinate of the spot center.
     crop_size : list, optional
         Size of the cropped patch [width, height].
+        DLPFC / Mouse Brain Coronal dataset: 64
+        HER2-positive breast cancer dataset: 195/300
 
     Returns
     -------
