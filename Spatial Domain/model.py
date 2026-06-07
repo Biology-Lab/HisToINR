@@ -6,12 +6,11 @@ import anndata as ad
 from sklearn.metrics.cluster import adjusted_rand_score
 import matplotlib.pyplot as plt
 from sklearn.mixture import GaussianMixture
-from STINR.networks import *
+from HisToINR.networks import *
 import scanpy as sc
 
 np.random.seed(1234)
-# slice_idx = [151507, 151508, 151509, 151510]
-# slice_idx = [151669,151670,151671,151672]
+
 slice_idx = [151673, 151674, 151675, 151676]
 
 celltype_list_use = ['Astros_1', 'Astros_2', 'Astros_3',
@@ -92,24 +91,22 @@ class Model():
         # DLPFC UNI Image Feature Extractor
         # all_features = []
         # for i, adata in enumerate(adata_st_list_raw):
-        #     # step1:读取每个切片的图像
+        #     # step1: read image
         #     section_id = str(slice_idx[i])
         #     img_path = os.path.join('STINR/Images',
         #                                       section_id + '_hires_image.png')
-        #     # step2：读入坐标
+        #     # step2：read spatial coord
         #     scale = adata.uns['spatial'][list(adata.uns["spatial"].keys())[0]]['scalefactors']['tissue_hires_scalef']
         #     spatial = (adata.obsm['spatial'] * scale).astype(int)
-        #     # step3:提取图像特征
+        #     # step3: extract image feature
         #     image_feat_uni = UNI_features(img_path, spatial)
-        #     # step4:收集特征
+        #     # step4: collect image features of all slices
         #     all_features.append(image_feat_uni)
         # combined_features = np.vstack(all_features)  # [14243,1024]
         # image_feat = torch.tensor(combined_features, dtype=torch.float32, requires_grad=True)
-        # # 推荐方法：保存到obsm中
         # image_feat_np = image_feat.detach().cpu().numpy()
         # adata_st.obsm['image_feat_uni'] = image_feat_np
-        # print(f"图像特征已保存到 obsm['image_feat_uni']，形状: {adata_st.obsm['image_feat_uni'].shape}")
-        # adata_st.write('adata_st_DLPFC_modified1_first.h5ad')
+        # adata_st.write('adata_st_DLPFC_modified1.h5ad')
 
         # read data
         if scipy.sparse.issparse(adata_st.X):
@@ -146,14 +143,10 @@ class Model():
 
             if step % 1000 == 0:
 
-                adata_st_list_raw0 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR-main/STINR-main/adata_st_list_raw0.h5ad')
-                adata_st_list_raw1 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR-main/STINR-main/adata_st_list_raw1.h5ad')
-                adata_st_list_raw2 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR-main/STINR-main/adata_st_list_raw2.h5ad')
-                adata_st_list_raw3 = ad.read_h5ad(
-                    '/home/guodingfei/MyProject/STINR-main/STINR-main/adata_st_list_raw3.h5ad')
+                adata_st_list_raw0 = ad.read_h5ad('adata_st_list_raw0.h5ad')
+                adata_st_list_raw1 = ad.read_h5ad('adata_st_list_raw1.h5ad')
+                adata_st_list_raw2 = ad.read_h5ad('adata_st_list_raw2.h5ad')
+                adata_st_list_raw3 = ad.read_h5ad('adata_st_list_raw3.h5ad')
                 adata_st_list_raw = []
                 adata_st_list_raw.append(adata_st_list_raw0)
                 adata_st_list_raw.append(adata_st_list_raw1)
@@ -172,7 +165,7 @@ class Model():
                     result[i].obs["GM"] = self.adata_st.obs.loc[result[i].obs_names,]["GM"]
 
                     section_id = str(slice_idx[i])
-                    Ann_df = pd.read_csv(os.path.join('/home/guodingfei/MyProject/STINR改进/STINR-main/STINR-main/STINR/DLPFC_annotations',
+                    Ann_df = pd.read_csv(os.path.join('DLPFC_annotations',
                                                       section_id + '_truth.txt'), sep='\t',
                                          header=None, index_col=0)
                     Ann_df.columns = ['Ground Truth']
