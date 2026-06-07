@@ -93,8 +93,7 @@ class Model():
         # for i, adata in enumerate(adata_st_list_raw):
         #     # step1: read image
         #     section_id = str(slice_idx[i])
-        #     img_path = os.path.join('STINR/Images',
-        #                                       section_id + '_hires_image.png')
+        #     img_path = os.path.join('Images', section_id + '_hires_image.png')
         #     # step2：read spatial coord
         #     scale = adata.uns['spatial'][list(adata.uns["spatial"].keys())[0]]['scalefactors']['tissue_hires_scalef']
         #     spatial = (adata.obsm['spatial'] * scale).astype(int)
