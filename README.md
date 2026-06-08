@@ -16,4 +16,4 @@ The framework supports multiple downstream tasks, including:
 | PyTorch   | 2.7.0           |
 
 # Framework
-![Framework](figures/framework.png)
+![Framework](framework.png)
