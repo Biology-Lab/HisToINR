@@ -9,7 +9,11 @@ The framework supports multiple downstream tasks, including:
 - Multi-omics Integration
 
 # Environment Setup
+| Component | Version         |
+| --------- | --------------- |
+| Python    | 3.12            |
+| CUDA      | 12.8            |
+| PyTorch   | 2.7.0           |
 
 # Framework
-
 ![Framework](figures/framework.png)
