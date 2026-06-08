@@ -1,4 +1,4 @@
-# HisToINR: Integrating Histological Images with Implicit Neural Representations for Spatial Transcriptomics Analysis
+# HisToINR: Integrating Histological Images with Implicit Neural Representations for Spatial Transcriptomics Analysis
 HisToINR is a unified framework for spatial transcriptomics analysis that integrates transcriptomic profiles, histological image information, spatial coordinates, and cross-slice context through implicit neural representations (INRs) and residual multimodal fusion.
 
 The framework supports multiple downstream tasks, including:
